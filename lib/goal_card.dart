@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:aquiadoro/aquadoro.dart';
 
 class GoalCard extends StatefulWidget {
   @override
@@ -49,7 +50,22 @@ class _GoalCardState extends State<GoalCard> {
                 width: anchoPantalla*0.13,
                 child: FlatButton(
                  onPressed: (){
-                   print('Navegando');
+                   //print('Navegando');
+                   if( ( widget.actividad != null ) && 
+                   ( widget.tConcentracion != null ) &&
+                   ( widget.tDescanso != null )
+                   ){//En caso de no tener campos nulos
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => Aquadoro(
+                        actividad: widget.actividad,
+                        tConcentracion: widget.tConcentracion,
+                        tDescanso: widget.tDescanso,//manda los argumentos
+                      )
+                    )
+                    ); // push
+                   }else{
+                     //No hace nada si un campo es null
+                   }
                  },//funcion que haga al hacerlo 
                  child: Icon(
                    Icons.arrow_forward_ios,
