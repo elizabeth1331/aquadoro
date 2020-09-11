@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 class GoalCard extends StatefulWidget {
   @override
   _GoalCardState createState() => _GoalCardState();
+
+  String actividad;
+  int tConcentracion;
+  int tDescanso;
+
 }
 
 class _GoalCardState extends State<GoalCard> {
@@ -14,7 +19,7 @@ class _GoalCardState extends State<GoalCard> {
         child: Container(
           margin: EdgeInsets.all(10),//todas las direcciones
           //height: 80, no es necesario por defecto te da la altura
-          width: anchoPantalla * 0.9,
+         // width: anchoPantalla * 0.9,
           decoration:BoxDecoration(
             color: Color.fromRGBO(223, 255, 255, 1),
             borderRadius: BorderRadius.circular(15.0),
@@ -29,16 +34,30 @@ class _GoalCardState extends State<GoalCard> {
               ),
               Spacer(),
               Container(
-                padding: EdgeInsets.only(left:10, bottom:13),//para poner margen interior
+                
                 child: _inputConcentracion(),
                 width: anchoPantalla* 0.15,
               ),
               Spacer(),
               Container(
-                padding: EdgeInsets.only(left:10, bottom:13),//para poner margen interior
+                
                 child: _inputDescanso(),
                 width: anchoPantalla* 0.15,
-              )
+              ),
+              Spacer(),
+              Container(
+                width: anchoPantalla*0.13,
+                child: FlatButton(
+                 onPressed: (){
+                   print('Navegando');
+                 },//funcion que haga al hacerlo 
+                 child: Icon(
+                   Icons.arrow_forward_ios,
+                   size: anchoPantalla*0.1,
+                   color: Colors.cyan[700],
+                 ),
+                 ),
+              ),
 
             ],
           ),
@@ -55,7 +74,8 @@ class _GoalCardState extends State<GoalCard> {
        
      ),
      onChanged: (activity){
-         print(activity);
+        widget.actividad=activity;
+         print("La actividad es ${widget.actividad}");
        } //cuando exista cambio en el tecto se crea un parametro que es la variable activity, la cual se usa en la funcion
        //Recibe entradas de texto y las muestra en terminal 
 
@@ -72,7 +92,8 @@ class _GoalCardState extends State<GoalCard> {
        
      ),
      onChanged: (tiempoConcentracion){
-         print(tiempoConcentracion);
+       widget.tConcentracion=(double.parse(tiempoConcentracion)).toInt(); //parseo a double //toInt mtodo de double qu epermite tranformar los tipos de datos a enteros
+       print("La actividad es ${widget.tConcentracion}");
        } //cuando exista cambio en el tecto se crea un parametro que es la variable activity, la cual se usa en la funcion
        //Recibe entradas de texto y las muestra en terminal 
 
@@ -87,7 +108,8 @@ class _GoalCardState extends State<GoalCard> {
        
      ),
      onChanged: (tiempoDescanso){
-         print(tiempoDescanso);
+         widget.tDescanso=(double.parse(tiempoDescanso)).toInt(); //parseo a double //toInt mtodo de double qu epermite tranformar los tipos de datos a enteros
+         print("La actividad es ${widget.tDescanso}");
        } //cuando exista cambio en el tecto se crea un parametro que es la variable activity, la cual se usa en la funcion
        //Recibe entradas de texto y las muestra en terminal 
 
