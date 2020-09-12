@@ -1,3 +1,4 @@
+import 'package:aquiadoro/pantalla_carga.dart';
 import 'package:flutter/material.dart';
 import 'package:aquiadoro/goals_page.dart';
 import 'package:aquiadoro/aquadoro.dart';
@@ -11,11 +12,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Material App',
       routes: { //recibe un mapa o un diccionario 
+        'pantallaCarga' : (BuildContext context) =>PantallaDeCarga(),
         'goalsPage': (BuildContext context) =>GoalsPage(),
         'aquadoro': (BuildContext context) =>Aquadoro(),
         
       },
-      initialRoute: 'goalsPage',
+      initialRoute: 'pantallaCarga',
     );
   }
 }
