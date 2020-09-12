@@ -9,9 +9,13 @@ class GoalsPage extends StatefulWidget {
 
   @override
   GoalsPageState createState() => GoalsPageState();
+
 }
 
-class GoalsPageState extends State <GoalsPage> {
+class GoalsPageState extends State <GoalsPage> with TickerProviderStateMixin {
+
+  //mixin doble herencia que combina lo que extiende de la primera clase
+  //de GoalPage y ahora se agrega una nueva herencia de mixin 
 
   final List<GoalCard> _metas=[];
   int index;
@@ -60,6 +64,7 @@ class GoalsPageState extends State <GoalsPage> {
 
       ),
 
+
     ); 
   }
 
@@ -95,11 +100,25 @@ class GoalsPageState extends State <GoalsPage> {
    
    
    void _agregarCard(){
-     GoalCard meta= new GoalCard();
+     final animacionCards= new AnimationController(
+       vsync: this, 
+       duration: Duration(milliseconds: 600),
+       );
+     GoalCard meta= new GoalCard(
+       animationController: animacionCards,
+     );
      setState(() {
        _metas.insert(_metas.length, meta); //se agrega en la ultima posicion de la lista una nueva meta
      });
+     meta.animationController.forward();//para evitar que use tanta memoria forward()
    
 
   }
+  @override
+ void dispose(){
+   for (GoalCard meta in _metas)meta.animationController.dispose();
+   super.dispose();
+ }
+   //sobre escribir para obtimizar memoria y recursos
+
 }

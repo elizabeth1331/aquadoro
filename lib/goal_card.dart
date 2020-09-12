@@ -2,12 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:aquiadoro/aquadoro.dart';
 
 class GoalCard extends StatefulWidget {
+
+
+  GoalCard({
+    this.animationController,
+  });
+  
+
   @override
   _GoalCardState createState() => _GoalCardState();
 
   String actividad;
   int tConcentracion;
   int tDescanso;
+  final AnimationController animationController;
 
 }
 
@@ -15,7 +23,12 @@ class _GoalCardState extends State<GoalCard> {
   @override
   Widget build(BuildContext context) {
     double anchoPantalla= MediaQuery.of(context).size.width;
-    return Container(
+    return SizeTransition(
+      sizeFactor: CurvedAnimation(
+      parent: widget.animationController, 
+      curve:Curves.linear,
+      ),
+      axisAlignment: 0.0,
     child: Center(
         child: Container(
           margin: EdgeInsets.all(10),//todas las direcciones
