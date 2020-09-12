@@ -13,7 +13,7 @@ class _PantallaDeCargaState extends State<PantallaDeCarga> {
   @override
   Widget build(BuildContext context) {
     return SplashScreen(
-      seconds: 3,
+      seconds: 4,
       navigateAfterSeconds: GoalsPage(),
       title: Text('Acuadoro',
       style: TextStyle(

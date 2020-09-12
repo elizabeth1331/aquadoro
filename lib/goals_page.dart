@@ -12,6 +12,10 @@ class GoalsPage extends StatefulWidget {
 }
 
 class GoalsPageState extends State <GoalsPage> {
+
+  final List<GoalCard> _metas=[];
+  int index;
+
   @override
   Widget build(BuildContext context) {
     
@@ -26,8 +30,29 @@ class GoalsPageState extends State <GoalsPage> {
           Container(color: Colors.cyan[600]),
           Column(
               children: [
-                GoalCard(),
-                GoalCard(),
+                Flexible(
+                  child: 
+                    ListView.builder(
+                      itemBuilder: (_ , int index)=> _metas[index],
+                      itemCount: _metas.length,
+                      )),
+
+              //  Expanded(child: Container(), ),//sirve para que ocupe el resto de la pantalla
+                  FloatingActionButton(
+                   onPressed: (){
+                      _agregarCard();
+
+                    },
+                    child: Icon(
+                    Icons.add_circle_outline,
+                    color:  Colors.cyan[100],
+                    size: 50,
+                    ),
+
+                  ),
+
+                  Container( height:30, ),
+                  
                
               ],
           ),
@@ -38,9 +63,10 @@ class GoalsPageState extends State <GoalsPage> {
     ); 
   }
 
+ 
+
   Widget _fadeText(){
     return Container(
-
       margin: EdgeInsets.only(top:5),
        child: SizedBox(
             width: 350.0,
@@ -63,6 +89,17 @@ class GoalsPageState extends State <GoalsPage> {
             ),
        ),    
     );
+
+  }
+
+   
+   
+   void _agregarCard(){
+     GoalCard meta= new GoalCard();
+     setState(() {
+       _metas.insert(_metas.length, meta); //se agrega en la ultima posicion de la lista una nueva meta
+     });
+   
 
   }
 }
