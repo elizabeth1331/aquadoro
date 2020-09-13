@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:google_fonts/google_fonts.dart';
+
 
 class Aquadoro extends StatefulWidget {
   
@@ -52,38 +54,89 @@ class _AquadoroState extends State<Aquadoro> {
   Widget build(BuildContext context) {
     double ancho= MediaQuery.of(context).size.width;
     return Scaffold(
-      appBar: AppBar(
+     /* appBar: AppBar(
         centerTitle: true,
         title: Text('Aquadoro'),// manda a llamar el texto 
         backgroundColor: Colors.cyan[600],
-      ),
-      body: Stack(
-        children: [
-          Container(color: Colors.cyan[600]),
+      ),*/
+      body:  Stack(
+          children: [
+            /*Container(color: Colors.cyan[600]),*/ //este se quita para usar la funcion del color de fondo
+            fondoPomodoro(),
+         SafeArea  ( // Error ya que muestra en color blanco no puede enolver un Stack
+                        child: Center(
+               child: Column(
+                 
+                 children: <Widget> [
+                   _nuestroAppBar(context),
+                   SizedBox(height:40),
+                   _contadorAcuadoro(),
+                   SizedBox( height: 20,),
+                    _aquadoroStack(ancho),
+                    Expanded(child: Container()), //misma funcion que un SizeBox
 
+                   _butones(),
+                   Expanded(child: Container()), 
+                 ],
 
-         Center(
-           child: Column(
-             children: <Widget> [
-               SizedBox(height:40),
-               _contadorAcuadoro(),
-               SizedBox( height: 20,),
-                _aquadoroStack(ancho),
-                Expanded(child: Container()), //misma funcion que un SizeBox
-
-               _butones(),
-               Expanded(child: Container()), 
-             ],
-
+               ),
+             ),
            ),
-         ),
 
-        ],
+          ],
 
-      ),
+        ),
+      
 
     );
   }
+
+  Widget fondoPomodoro(){
+    return  Container(
+      decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: <Color> [Colors.cyan[400], Colors.cyan[800]])),
+    );
+  }
+
+
+  Widget _nuestroAppBar(BuildContext context){
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget> [
+        Container(
+          width: 50,
+          child: FlatButton(
+            padding: EdgeInsets.only(right: 10, top:10),
+
+            onPressed: () {
+              Navigator.pop(context);
+
+            }
+            
+          , child: Icon(
+            Icons.arrow_forward_ios,
+           size: 35, 
+           color: Colors.cyan[100],
+           )),
+        ),
+        Expanded(
+          child: Container(
+          padding: EdgeInsets.only(top: 10),
+          child: Text(
+           widget.actividad,
+           style: GoogleFonts.architectsDaughter(
+            fontSize: 30,
+            fontWeight: FontWeight.bold, 
+            color: Colors.cyan[100]),
+          ),
+        ))
+      ],
+    );
+  }
+
+
+  
   Widget _contadorAcuadoro(){
     switch(contador){
       case 1:
@@ -210,13 +263,13 @@ class _AquadoroState extends State<Aquadoro> {
                           Center(
                             child: Text(
                               tipoActividad,
-                              style:  TextStyle(fontSize: 25, color: Colors.blueGrey[100]),
+                              style:  GoogleFonts.architectsDaughter(fontSize: 25, color: Colors.blueGrey[100]),
                             ),
                           ),
                           Center(
                             child: Text(
                               tiempoPantalla, 
-                              style:  TextStyle(fontSize: 25, color: Colors.blueGrey[100]),
+                              style:  GoogleFonts.architectsDaughter(fontSize: 25, color: Colors.blueGrey[100]),
                             ),
                           )
                         ]
@@ -244,7 +297,7 @@ class _AquadoroState extends State<Aquadoro> {
               children: <Widget>[
                 Text(
                   'Reset',
-                    style: TextStyle(fontSize:25, color: Colors.teal[900]),
+                    style: GoogleFonts.architectsDaughter(fontSize:25, color: Colors.teal[900]),
                 ),
                 Icon(
                   Icons.rotate_left, 
@@ -290,7 +343,7 @@ class _AquadoroState extends State<Aquadoro> {
                  children: <Widget>[ 
                    Text(
                      tipoActividad,
-                     style: TextStyle(fontSize: 25, color: Colors.indigo[800]),
+                     style: GoogleFonts.architectsDaughter(fontSize: 25, color: Colors.indigo[800]),
                    ),
                    Icon(
                      (kindActivity ) ? Icons.adjust: Icons.album,

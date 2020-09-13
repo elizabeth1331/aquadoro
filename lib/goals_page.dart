@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:aquiadoro/goal_card.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 
@@ -130,7 +131,7 @@ class GoalsPageState extends State <GoalsPage> with TickerProviderStateMixin {
                 "Vamos a \n hacerlo :3",
                 "¿Què has estado \ndejado pendiente?"
               ],
-              textStyle: TextStyle(
+              textStyle:   GoogleFonts.architectsDaughter(
                   fontSize: 35.0, 
                   color:Colors.blueGrey[50],
                   fontWeight: FontWeight.w600
