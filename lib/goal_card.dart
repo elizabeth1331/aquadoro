@@ -95,8 +95,36 @@ class _GoalCardState extends State<GoalCard> {
      
     );
   }//build
+
+  String inicialActivity(){
+    if( widget.actividad == null){
+      return ' ';
+    }else{
+      return "${widget.actividad.toString()}"; //se ocupa para para definir el initial value de TextFormField
+    }
+
+  }
+    String inicialConcentracion(){
+    if( widget.tConcentracion == null){
+      return ' ';
+    }else{
+      return "${widget.tConcentracion.toString()}"; //se ocupa para para definir el initial value de TextFormField
+    }
+
+  }
+    String inicialDescanso(){
+    if( widget.tDescanso == null){
+      return ' ';
+    }else{
+      return "${widget.tDescanso.toString()}"; //se ocupa para para definir el initial value de TextFormField
+    }
+
+  }
+
+
  Widget _actividadInput(){
    return TextFormField(
+     initialValue: inicialActivity(),
      decoration: InputDecoration(
        labelText: " Actividad",
        labelStyle: TextStyle(fontSize: 13),
@@ -112,8 +140,10 @@ class _GoalCardState extends State<GoalCard> {
  
  } //actividadInput
 
+
  Widget _inputConcentracion(){
    return TextFormField(
+     initialValue: inicialConcentracion(),
      keyboardType: TextInputType.numberWithOptions(decimal: true),//al moemtno de seleccionarlo te muestra el teclado numerido de Android o IOS
      decoration: InputDecoration(
        labelText: " Focus",
@@ -128,8 +158,11 @@ class _GoalCardState extends State<GoalCard> {
 
    );
  }
+
+
  Widget _inputDescanso(){
    return TextFormField(
+     initialValue: inicialDescanso(),
      keyboardType: TextInputType.numberWithOptions(decimal: true),//al moemtno de seleccionarlo te muestra el teclado numerido de Android o IOS
      decoration: InputDecoration(
        labelText: " Relax",
@@ -144,4 +177,5 @@ class _GoalCardState extends State<GoalCard> {
 
    );
  }
+
 }
