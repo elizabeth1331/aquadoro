@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class Aquadoro extends StatefulWidget {
   
@@ -23,6 +24,15 @@ class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = "focus";
   String tiempoPantalla;
   int contador=5;
+
+  bool kindActivity = false;
+  //Aqui se van a declarar para la funcionalidad del pomodoro
+  int startState=1;
+  int tConcentracionSeg=0;
+  int tDescansoSeg=0;
+
+  bool revisarTiempoCon= false;
+  bool revisarTiempoDes= false;
 
   @override
   void initState() {
@@ -253,10 +263,141 @@ class _AquadoroState extends State<Aquadoro> {
                 tipoActividad,
                 style: TextStyle(fontSize: 25, color: Colors.indigo[800]),
               ),
-              Icon(Icons.adjust, size: 25, color: Colors.blue[900],),
+              Icon(
+                (kindActivity ) ? Icons.adjust: Icons.album,
+               size: 25,
+               color: Colors.blue[900],),
             ],
           ),
-          onPressed: () {}, 
+          onPressed: () {
+
+            switch(startState){
+              case 1:
+              //Tiempo de Focus
+              {
+                tConcentracionSeg=(widget.tConcentracion*60);
+                Timer.periodic(Duration(seconds: 1), (t) {
+                  setState(() {
+                    if(tConcentracionSeg<1 || revisarTiempoCon==true ){
+                      t.cancel(); //se detiene el temporizador
+                      revisarTiempoCon=false;//el boton de reset no fue presionado
+                      tiempoPantalla= '${widget.tConcentracion.toString()}:00';//concatenar
+
+                      if (tConcentracionSeg<1){
+                        startState=2;
+                        tipoActividad ='Relax';
+                        kindActivity=true;
+                        tiempoPantalla = '${widget.tDescanso.toString()}:00';
+
+                      }
+                    }else if (tConcentracionSeg <60){
+                      tiempoPantalla='$tConcentracionSeg';
+                      tConcentracionSeg--;
+
+                    }else{
+                      int m=tConcentracionSeg ~/ 60;
+                      int s= tConcentracionSeg -(60*m);
+                      if(s<10){
+                        tiempoPantalla='$m:0$s';
+
+                      }else{
+                        tiempoPantalla= '$m:$s';
+                        tConcentracionSeg--;
+                      }
+                    }
+                    
+                  }); //se refresque cada que el contador disminuye
+
+
+                 });
+              }
+
+              break;
+
+              case 2:
+              {
+                tDescansoSeg=(widget.tDescanso*60);
+                Timer.periodic(Duration(seconds: 1), (t) {
+                  setState(() {
+                    if(tDescansoSeg<1 || revisarTiempoDes==true ){
+                      t.cancel(); //se detiene el temporizador
+                      revisarTiempoDes=false;//el boton de reset no fue presionado
+                      tiempoPantalla= '${widget.tConcentracion.toString()}:00';//concatenar
+
+                      if (tDescansoSeg<1){
+                        startState=1;
+                        tipoActividad ='Focus';
+                        kindActivity=false;
+                        tiempoPantalla = '${widget.tDescanso.toString()}:00';
+
+                      }
+                    }else if (tDescansoSeg <60){
+                      tiempoPantalla='$tDescansoSeg';
+                      tDescansoSeg--;
+
+                    }else{
+                      int m=tDescansoSeg ~/ 60;
+                      int s= tDescansoSeg -(60*m);
+                      if(s<10){
+                        tiempoPantalla='$m:0$s';
+
+                      }else{
+                        tiempoPantalla= '$m:$s';
+                        tDescansoSeg--;
+                      }
+                    }
+                    
+                  }); //se refresque cada que el contador disminuye
+
+
+                 });
+              }
+
+              break;
+
+              case 3:
+              {
+                tDescansoSeg=(30 * 60);
+                Timer.periodic(Duration(seconds: 1), (t) {
+                  setState(() {
+                    if(tDescansoSeg<1 || revisarTiempoDes==true ){
+                      t.cancel(); //se detiene el temporizador
+                      revisarTiempoDes=false;//el boton de reset no fue presionado
+                      tiempoPantalla= '${widget.tConcentracion.toString()}:00';//concatenar
+
+                      if (tDescansoSeg<1){
+                        startState=1;
+                        tipoActividad ='Focus';
+                        kindActivity=false;
+                        tiempoPantalla = '${widget.tDescanso.toString()}:00';
+
+                      }
+                    }else if (tDescansoSeg <60){
+                      tiempoPantalla='$tDescansoSeg';
+                      tDescansoSeg--;
+
+                    }else{
+                      int m=tDescansoSeg ~/ 60;
+                      int s= tDescansoSeg -(60*m);
+                      if(s<10){
+                        tiempoPantalla='$m:0$s';
+
+                      }else{
+                        tiempoPantalla= '$m:$s';
+                        tDescansoSeg--;
+                      }
+                    }
+                    
+                  }); //se refresque cada que el contador disminuye
+
+
+                 });
+              }
+
+              break;
+              default:
+            }
+          }, 
           ),
       ],
 
