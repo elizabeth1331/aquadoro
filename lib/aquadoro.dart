@@ -12,6 +12,7 @@ class Aquadoro extends StatefulWidget {
   final String actividad;
   final int tConcentracion;
   final int tDescanso;
+  
 
 
   @override
@@ -21,6 +22,7 @@ class Aquadoro extends StatefulWidget {
 class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = "focus";
   String tiempoPantalla;
+  int contador=5;
 
   @override
   void initState() {
@@ -47,6 +49,8 @@ class _AquadoroState extends State<Aquadoro> {
          Center(
            child: Column(
              children: <Widget> [
+               SizedBox(height:40),
+               _contadorAcuadoro(),
                SizedBox( height: 20,),
                 _aquadoroStack(ancho),
                 Expanded(child: Container()), //misma funcion que un SizeBox
@@ -58,13 +62,110 @@ class _AquadoroState extends State<Aquadoro> {
            ),
          ),
 
-
-
         ],
 
       ),
 
     );
+  }
+  Widget _contadorAcuadoro(){
+    switch(contador){
+      case 1:
+
+      return Row(
+        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,)
+        ]
+      );
+      break;
+
+      case 2:
+
+      return Row(
+        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,)
+        ]
+      );
+      break;
+
+      case 3:
+
+      return Row(
+        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+        ]
+      );
+      break;
+
+      case 4:
+
+      return Row(
+        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+        ]
+      );
+      break;
+
+      case 5:
+
+      return Row(
+        mainAxisAlignment:  MainAxisAlignment.spaceAround,
+        children: <Widget> [
+          Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+           Icon(Icons.av_timer, 
+          color: Colors.teal[100],
+           size:45,),
+        ]
+      );
+      break;
+
+      default: 
+      return Container(height: 45,);
+
+
+    }
+
   }
 
   Widget _aquadoroStack(double ancho){
