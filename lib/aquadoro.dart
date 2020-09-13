@@ -23,7 +23,7 @@ class Aquadoro extends StatefulWidget {
 class _AquadoroState extends State<Aquadoro> {
   String tipoActividad = "focus";
   String tiempoPantalla;
-  int contador;
+  int contador=0;
 
   bool kindActivity = false;
   //Aqui se van a declarar para la funcionalidad del pomodoro
@@ -328,7 +328,7 @@ class _AquadoroState extends State<Aquadoro> {
                              kindActivity=true;
                              tiempoPantalla = '${widget.tDescanso.toString()}:00';
                              if (contador==4){
-                               //_mostrar alerta();
+                               _mostrarAlerta(context);
                                contador=5;
                                tiempoPantalla='${30}:00';
 
@@ -476,5 +476,74 @@ class _AquadoroState extends State<Aquadoro> {
    
        );
   }   
+
+
+
+  void _mostrarAlerta(BuildContext context){
+    showDialog(
+      context: context,
+      barrierDismissible: true, //se cirra la alerta cuando se de click fuera de ella
+      builder: (context){
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)
+          ),
+          backgroundColor: Colors.teal[200],
+          elevation: 25,
+          title: Text('\t\t Felicidades:',style: TextStyle(fontSize:30, color: Colors.blue[900])
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min, //esto indica que la columno abarque el tamaño minimo de nuestros elemento, dando tamaño a la alerta
+            children: <Widget> [
+              Text('Haz realizado 5 pomodoros seguidos', 
+              style: TextStyle(fontSize:20.5, color: Colors.indigo[900]),
+              ),
+              Text('Te recomendamos dividir esta meta en una màs pequeña para disminuir la carga',
+              style: TextStyle(fontSize:20, color: Colors.indigo[900]),
+              ),
+              Text('¿Nos tomamos un descanso de 30 minutos?',
+              style: TextStyle(fontSize:20, color: Colors.indigo[900]),
+              ),
+
+              Image.asset('assets/Acuadoro2.png', 
+              fit: BoxFit.cover,
+              height: 170,)
+            ],
+          ),
+
+          actions: [
+            FlatButton(
+            onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);//regresa a pomodoro y luego a metas
+            },
+             child: Text( 'Subdividir',
+             style: TextStyle(fontSize: 24, 
+             color: Colors.lightBlue[800]),
+             )),
+
+             FlatButton(
+               onPressed: (){
+                 Navigator.pop(context);
+                 setState(() {
+                   startState=3;
+                   print('Se mando al starState 3');
+                 });
+               },
+              child: 
+             Text('Descansar', style: TextStyle(fontSize: 24, 
+             color: Colors.lightBlue[700]),
+             ))
+
+
+
+          ],
+
+          
+
+        );
+      }
+      );
+  }
    
 }   
