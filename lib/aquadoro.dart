@@ -327,7 +327,15 @@ class _AquadoroState extends State<Aquadoro> {
                              tipoActividad ='Relax';
                              kindActivity=true;
                              tiempoPantalla = '${widget.tDescanso.toString()}:00';
-   
+                             if (contador==4){
+                               //_mostrar alerta();
+                               contador=5;
+                               tiempoPantalla='${30}:00';
+
+                             }else{
+                               tiempoPantalla='${widget.tDescanso}:00';
+                             }
+                             
                            }
                          }else if (tConcentracionSeg <60){
                            tiempoPantalla='$tConcentracionSeg';
@@ -376,7 +384,13 @@ class _AquadoroState extends State<Aquadoro> {
                              tipoActividad ='Focus';
                              kindActivity=false;
                              tiempoPantalla = '${widget.tDescanso.toString()}:00';
-   
+                             
+                             if (contador<4){
+                               
+                               contador++;
+                               
+
+                             }
                            }
                          }else if (tDescansoSeg <60){
                            tiempoPantalla='$tDescansoSeg';
@@ -427,7 +441,7 @@ class _AquadoroState extends State<Aquadoro> {
                              tipoActividad ='Focus';
                              kindActivity=false;
                              tiempoPantalla = '${widget.tDescanso.toString()}:00';
-   
+                             contador=0;
                            }
                          }else if (tDescansoSeg <60){
                            tiempoPantalla='$tDescansoSeg';
