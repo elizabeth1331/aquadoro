@@ -31,6 +31,7 @@ class _GoalCardState extends State<GoalCard> {
       axisAlignment: 0.0,
     child: Center(
         child: Container(
+          height: 80,
           margin: EdgeInsets.all(10),//todas las direcciones
           //height: 80, no es necesario por defecto te da la altura
          // width: anchoPantalla * 0.9,
@@ -82,7 +83,7 @@ class _GoalCardState extends State<GoalCard> {
                  },//funcion que haga al hacerlo 
                  child: Icon(
                    Icons.arrow_forward_ios,
-                   size: anchoPantalla*0.1,
+                   size: (MediaQuery.of(context).size.width < 600 ) ? anchoPantalla * 0.1: 40,
                    color: Colors.cyan[700],
                  ),
                  ),
