@@ -64,16 +64,17 @@ class _AquadoroState extends State<Aquadoro> {
           children: [
             /*Container(color: Colors.cyan[600]),*/ //este se quita para usar la funcion del color de fondo
             fondoPomodoro(),
+            Container(color: Colors.cyan[600]),//
          SafeArea  ( // Error ya que muestra en color blanco no puede enolver un Stack
                         child: Center(
                child: Column(
                  
-                 children: <Widget> [
+                 children:  [
                    _nuestroAppBar(context),
                    SizedBox(height:40),
                    _contadorAcuadoro(),
                    SizedBox( height: 20,),
-                    _aquadoroStack(ancho),
+                    _aquadoroStack(ancho, context),
                     Expanded(child: Container()), //misma funcion que un SizeBox
 
                    _butones(),
@@ -91,12 +92,17 @@ class _AquadoroState extends State<Aquadoro> {
 
     );
   }
+  /*
+  const Colors(0xFF00BCD4),
+        const Colors(0xFF00838F),*/
 
   Widget fondoPomodoro(){
     return  Container(
       decoration: BoxDecoration(
-      gradient: LinearGradient(
-        colors: <Color> [Colors.cyan[400], Colors.cyan[800]])),
+          gradient: LinearGradient(colors: <Color>[
+        Colors.cyan[400],
+        Colors.cyan[800],
+      ])),
     );
   }
 
@@ -238,12 +244,13 @@ class _AquadoroState extends State<Aquadoro> {
 
   }
 
-  Widget _aquadoroStack(double ancho){
+  Widget _aquadoroStack(double ancho, BuildContext context){
 
     return Stack(
-      children: [
+      children: <Widget>[
         Container(
-          width:400,
+          width: 400,
+          //width: MediaQuery.of(context).size.width * (1/3),
           height: 400,
           child: FlareActor(
             'assets/Aquadoro.flr',
@@ -269,7 +276,7 @@ class _AquadoroState extends State<Aquadoro> {
 
         Positioned(
           top: 160,
-          left: ancho * 0.25,
+          left: 115,
                   child: Container(
                       height: 100,
                       width: 170,
@@ -324,7 +331,7 @@ class _AquadoroState extends State<Aquadoro> {
               ]
             ),
             onPressed: () {
-              animacionActual='Reset';
+              animacionActual="Reset";
               if(tConcentracionSeg>1){
                 revisarTiempoCon=true;
                 startState=1;
@@ -426,7 +433,7 @@ class _AquadoroState extends State<Aquadoro> {
                          }
 
                          if(tConcentracionSeg < 11){
-                           animacionActual='FinFocus';
+                           animacionActual="FinFocus";
                          
                          }
                          
@@ -443,7 +450,7 @@ class _AquadoroState extends State<Aquadoro> {
                      setState(() {
                        botonDeshabilitado=true;
                        resetDeshabilitado=false;
-                       animacionActual='LoopRelax';
+                       animacionActual="LoopRelax";
                      });
                      tDescansoSeg=(widget.tDescanso*60);
                      Timer.periodic(Duration(seconds: 1), (t) {
@@ -487,7 +494,7 @@ class _AquadoroState extends State<Aquadoro> {
                          }
 
                          if(tConcentracionSeg < 11){
-                           animacionActual= 'FinRelax';
+                           animacionActual= "FinRelax";
 
                          }
                          
@@ -505,6 +512,7 @@ class _AquadoroState extends State<Aquadoro> {
                      setState(() {
                        botonDeshabilitado=true;
                        resetDeshabilitado=false;
+                       animacionActual= "LoopRelax";
                        
                      });//funcion para habilitar y seahabilitar
 
@@ -541,6 +549,11 @@ class _AquadoroState extends State<Aquadoro> {
                              
                            }
                            tDescansoSeg--;
+                         }
+
+                         if(tConcentracionSeg < 11){
+                           animacionActual= "FinRelax";
+
                          }
                          
                        }); //se refresque cada que el contador disminuye
